@@ -1,4 +1,4 @@
-package com.system.college_erp_system.model;
+package com.system.college_erp_system.model.party;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +18,7 @@ public class Party {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long party_id;
+    private Long party_id;
     private String party_type_id;
     private String status_id;
     private Date from_date;
