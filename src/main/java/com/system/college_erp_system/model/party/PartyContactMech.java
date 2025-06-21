@@ -1,6 +1,7 @@
 package com.system.college_erp_system.model.party;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +20,12 @@ public class PartyContactMech {
     @JoinColumn(name = "party_id")
     private Party party;
 
+    @JoinColumn(name = "contact_mech_id")
+    private ContactMech contactMech ;
 
-    private int contact_mech_id;
+    private String contact_mech_purpose_id;
 
+    @NotNull
     private Date from_date;
     private Date thru_date;
 

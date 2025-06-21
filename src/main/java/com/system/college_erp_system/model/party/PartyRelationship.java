@@ -9,15 +9,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactMech {
+public class PartyRelationship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long contact_mech_id;
+    private Long party_relationship_id;
+
     @NotNull
-    private String contact_mech_type_id;
-    private String email_string;
+    private String party_id_from;
+
+    @NotNull
+    private String role_type_id_from;
+
+    @NotNull
+    private String party_id_to;
+
+    @NotNull
+    private String role_type_id_to;
+
+    @NotNull
+    private Date from_date;
+
 }

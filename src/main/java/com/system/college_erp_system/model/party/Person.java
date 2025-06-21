@@ -1,6 +1,7 @@
 package com.system.college_erp_system.model.party;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,11 +22,16 @@ public class Person {
     @JoinColumn(name ="party_id")
     private Party party;
 
+    @NotNull
     private Long enrollment_no;
+    @NotNull
     private String first_name;
     private String middle_name;
+    @NotNull
     private String last_name;
+    @NotNull
     private Date dob;
+    @NotNull
     private String gender;
 
 }

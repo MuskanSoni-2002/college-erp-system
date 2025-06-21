@@ -12,15 +12,18 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(
+        name = "party_subject",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id", "subject_id","from_date"})
+)
 public class PartySubject {
-    @EmbeddedId
-    //private PartySubjectId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long party_subject_id;
 
-    @MapsId
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @MapsId
     @JoinColumn(name = "party_id")
     private Party party;
 

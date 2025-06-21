@@ -1,6 +1,7 @@
 package com.system.college_erp_system.model.functional;
 
 import com.system.college_erp_system.model.party.Party;
+import com.system.college_erp_system.model.security.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,27 +10,32 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentAttendance {
+@Entity
+public class FacultyLeave {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long attendance_id;
+    private Long leave_id;
 
     @NotNull
     @JoinColumn(name = "party_id")
     private Party party;
 
     @NotNull
-    @JoinColumn(name="subject_code")
-    private Subject subject;
+    private Date from_date;
+
+    private Date thru_date;
 
     @NotNull
-    private Date attendance_date;
+    @JoinColumn(name = "leave_type_id", referencedColumnName = "enum_type_id")
+    private Enumeration leaveType;
+
 
     @NotNull
     private String status_id;
+
+    private String reason_description;
 }

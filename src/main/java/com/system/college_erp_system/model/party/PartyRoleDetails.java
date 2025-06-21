@@ -9,21 +9,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Org {
+@Entity
+public class PartyRoleDetails {
 
     @Id
-    private Long party_id;
-
+    private Long party_role_id;
     @MapsId
+    @JoinColumn(name = "party_role_id")
+    private PartyRole partyRole;
+
+    @NotNull
     @JoinColumn(name = "party_id")
     private Party party;
 
-    @NotNull
-    private String org_name;
-    private int org_group_size;
-
+    private String course_id;
+    private String department_id;
+    private String designation_id;
 }

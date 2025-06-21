@@ -1,9 +1,7 @@
 package com.system.college_erp_system.model.party;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +14,17 @@ import java.util.Date;
 @NoArgsConstructor
 public class PartyRole {
     @Id
-    private Long party_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long party_role_id;
 
-    @MapsId
+    @NotNull
     @JoinColumn(name = "party_id")
     private Party party;
 
+    @NotNull
     private String party_role_type_id;
-    private String course_id;
-    private String department_id;
-    private String designation_id;
+
+    @NotNull
     private Date from_date;
     private Date thru_date;
 }
