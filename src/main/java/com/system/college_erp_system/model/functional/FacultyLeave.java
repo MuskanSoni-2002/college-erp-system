@@ -1,7 +1,7 @@
 package com.system.college_erp_system.model.functional;
 
 import com.system.college_erp_system.model.party.Party;
-import com.system.college_erp_system.model.security.Enumeration;
+import com.system.college_erp_system.model.config.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,7 @@ public class FacultyLeave {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long leave_id;
 
+    @ManyToOne
     @NotNull
     @JoinColumn(name = "party_id")
     private Party party;
@@ -29,13 +30,15 @@ public class FacultyLeave {
 
     private Date thru_date;
 
+    @ManyToOne
     @NotNull
     @JoinColumn(name = "leave_type_id", referencedColumnName = "enum_type_id")
     private Enumeration leaveType;
 
-
+    @ManyToOne
     @NotNull
-    private String status_id;
+    @JoinColumn(name = "status_id", referencedColumnName = "enum_type_id")
+    private Enumeration status;
 
     private String reason_description;
 }

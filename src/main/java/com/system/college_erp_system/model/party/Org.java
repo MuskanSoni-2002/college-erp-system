@@ -1,9 +1,6 @@
 package com.system.college_erp_system.model.party;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,11 +16,12 @@ public class Org {
     private Long party_id;
 
     @MapsId
+    @OneToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
     @NotNull
     private String org_name;
-    private int org_group_size;
+    private Integer org_group_size;
 
 }

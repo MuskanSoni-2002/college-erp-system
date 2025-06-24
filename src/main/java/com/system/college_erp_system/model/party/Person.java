@@ -22,6 +22,7 @@ public class Person {
     @JoinColumn(name ="party_id")
     private Party party;
 
+    @Column(unique = true)
     @NotNull
     private Long enrollment_no;
     @NotNull

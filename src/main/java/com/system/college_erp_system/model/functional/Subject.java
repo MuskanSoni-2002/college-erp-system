@@ -1,9 +1,8 @@
 package com.system.college_erp_system.model.functional;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import com.system.college_erp_system.model.config.Enumeration;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +18,18 @@ import lombok.NoArgsConstructor;
 public class Subject {
     @Id
     private String subject_code;
+    @NotNull
     private String subject_name;
-    private String course_id;
-    private Integer semester_id;
+
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "course_id", referencedColumnName = "enum_type_id")
+    private Enumeration course;
+
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "semester_id", referencedColumnName = "enum_type_id")
+    private Enumeration semester;
+
     private Integer credits;
 }

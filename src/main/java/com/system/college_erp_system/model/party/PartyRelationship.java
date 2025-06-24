@@ -1,9 +1,6 @@
 package com.system.college_erp_system.model.party;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,22 +12,22 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(
+        name = "party_relationship",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_role_id_from","party_role_id_to"})
+)
 public class PartyRelationship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long party_relationship_id;
 
-    @NotNull
-    private String party_id_from;
+    @ManyToOne
+    @JoinColumn(name = "party_role_id_from", referencedColumnName = "party_role_id")
+    private PartyRole partyRoleFrom;
 
-    @NotNull
-    private String role_type_id_from;
-
-    @NotNull
-    private String party_id_to;
-
-    @NotNull
-    private String role_type_id_to;
+    @ManyToOne
+    @JoinColumn(name = "party_role_id_to", referencedColumnName = "party_role_id")
+    private PartyRole partyRoleTo;
 
     @NotNull
     private Date from_date;

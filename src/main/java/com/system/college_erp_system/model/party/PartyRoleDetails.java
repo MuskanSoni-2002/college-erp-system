@@ -1,10 +1,7 @@
 package com.system.college_erp_system.model.party;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.validation.constraints.NotNull;
+import com.system.college_erp_system.model.config.Enumeration;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,15 +14,22 @@ public class PartyRoleDetails {
 
     @Id
     private Long party_role_id;
+
     @MapsId
+    @OneToOne
     @JoinColumn(name = "party_role_id")
     private PartyRole partyRole;
 
-    @NotNull
-    @JoinColumn(name = "party_id")
-    private Party party;
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "enum_type_id")
+    private Enumeration course;
 
-    private String course_id;
-    private String department_id;
-    private String designation_id;
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "enum_type_id")
+    private Enumeration department;
+
+    @ManyToOne
+    @JoinColumn(name = "designation_id", referencedColumnName = "enum_type_id")
+    private Enumeration designation;
+
 }

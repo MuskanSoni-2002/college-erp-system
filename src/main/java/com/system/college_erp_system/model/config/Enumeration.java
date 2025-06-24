@@ -1,4 +1,4 @@
-package com.system.college_erp_system.model.security;
+package com.system.college_erp_system.model.config;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(
+        name = "enumeration",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"enum_type_id", "enum_value_1"})
+)
 public class Enumeration {
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -17,7 +21,9 @@ public class Enumeration {
 
     @NotNull
     private String enum_type_id;
+
     @NotNull
-    private String enum_value;
+    private String enum_value_1;
+    private String enum_value_2;
     private String description;
 }

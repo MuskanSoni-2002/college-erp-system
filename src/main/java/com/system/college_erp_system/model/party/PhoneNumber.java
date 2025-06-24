@@ -13,14 +13,18 @@ import lombok.NoArgsConstructor;
 public class PhoneNumber {
     @Id
     private Long contact_mech_id;
+
     @MapsId
+    @OneToOne
     @JoinColumn(name = "contact_mech_id")
     private ContactMech contactMech;
 
     @NotNull
     @Column(length = 2)
     private String country_code;
+
     @NotNull
-    private int phone_number;
+    @Column(length = 10, unique = true)
+    private String phone_number;
 
 }

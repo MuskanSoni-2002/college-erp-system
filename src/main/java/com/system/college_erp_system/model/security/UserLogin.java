@@ -16,11 +16,13 @@ public class UserLogin {
     private String user_login_id;
 
     @NotNull
+    @OneToOne
     @JoinColumn(name="party_id")
     private Party party;
 
     @NotNull
     private String password;
+
     @NotNull
-    private String is_enabled;
+    private Boolean is_enabled;
 }

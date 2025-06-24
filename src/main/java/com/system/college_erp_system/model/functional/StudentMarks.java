@@ -1,7 +1,7 @@
 package com.system.college_erp_system.model.functional;
 
 import com.system.college_erp_system.model.party.Party;
-import com.system.college_erp_system.model.security.Enumeration;
+import com.system.college_erp_system.model.config.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -24,14 +24,17 @@ public class StudentMarks {
     private Long student_marks_id;
 
     @NotNull
+    @ManyToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
     @NotNull
+    @ManyToOne
     @JoinColumn(name = "subject_code")
     private Subject subject;
 
     @NotNull
+    @ManyToOne
     @JoinColumn(name = "exam_type_id", referencedColumnName = "enum_type_id")
     private Enumeration examType;
 
@@ -39,8 +42,6 @@ public class StudentMarks {
     @NotNull
     private Integer marks_obtained;
 
-    @NotNull
-    private Integer max_marks;
     private Date exam_date;
 
 }

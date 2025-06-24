@@ -1,5 +1,6 @@
 package com.system.college_erp_system.model.party;
 
+import com.system.college_erp_system.model.config.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,17 +14,25 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PartyContactMech {
-    @Id
-    private Long party_id;
 
-    @MapsId
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long party_contact_mech_id;
+
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "contact_mech_id")
     private ContactMech contactMech ;
 
-    private String contact_mech_purpose_id;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "contact_mech_purpose_id",referencedColumnName = "enum_type_id")
+    private Enumeration enumeration;
 
     @NotNull
     private Date from_date;
