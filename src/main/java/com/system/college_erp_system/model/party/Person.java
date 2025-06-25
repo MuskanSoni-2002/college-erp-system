@@ -32,7 +32,6 @@ public class Person {
     private String last_name;
     @NotNull
     private Date dob;
-    @NotNull
     private String gender;
 
 }

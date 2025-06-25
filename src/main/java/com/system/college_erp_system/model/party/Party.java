@@ -20,9 +20,6 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long party_id;
 
-    @OneToMany(mappedBy = "party")
-    private List<PartyRole> roles;
-
     @NotNull
     @ManyToOne
     @JoinColumn(name = "party_type_id", referencedColumnName = "enum_id")

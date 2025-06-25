@@ -32,7 +32,7 @@ public class PartyContactMech {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "contact_mech_purpose_id",referencedColumnName = "enum_id")
-    private Enumeration enumeration;
+    private Enumeration contactMechPurpose;
 
     @NotNull
     private Date from_date;
