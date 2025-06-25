@@ -39,6 +39,6 @@ public class StudentAttendance {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "status_id", referencedColumnName = "enum_id")
     private Enumeration status;
 }

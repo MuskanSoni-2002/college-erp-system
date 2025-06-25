@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(
         name = "party_role",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id,party_role_type_id,from_date"})
 )
 public class PartyRole {
     @Id
@@ -23,13 +23,13 @@ public class PartyRole {
     private Long party_role_id;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "party_role_type_id",referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "party_role_type_id",referencedColumnName = "enum_id")
     private Enumeration partyRoleType;
 
     @NotNull

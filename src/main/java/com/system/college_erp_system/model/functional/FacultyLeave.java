@@ -32,12 +32,12 @@ public class FacultyLeave {
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "leave_type_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "leave_type_id", referencedColumnName = "enum_id")
     private Enumeration leaveType;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "status_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "status_id", referencedColumnName = "enum_id")
     private Enumeration status;
 
     private String reason_description;

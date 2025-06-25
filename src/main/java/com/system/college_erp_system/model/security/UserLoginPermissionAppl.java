@@ -30,7 +30,7 @@ public class UserLoginPermissionAppl {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "permission_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "permission_id", referencedColumnName = "enum_id")
     private Enumeration permission;
 
     @NotNull

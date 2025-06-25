@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(
         name = "party_relationship",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"party_role_id_from","party_role_id_to"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_role_id_from","party_role_id_to,from_date"})
 )
 public class PartyRelationship {
     @Id
@@ -31,5 +31,7 @@ public class PartyRelationship {
 
     @NotNull
     private Date from_date;
+
+    private Date thru_date;
 
 }

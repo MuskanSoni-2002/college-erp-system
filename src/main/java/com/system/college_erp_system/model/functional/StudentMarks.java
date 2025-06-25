@@ -35,7 +35,7 @@ public class StudentMarks {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "exam_type_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "exam_type_id", referencedColumnName = "enum_id")
     private Enumeration examType;
 
 

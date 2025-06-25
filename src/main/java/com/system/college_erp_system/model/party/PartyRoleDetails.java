@@ -21,15 +21,15 @@ public class PartyRoleDetails {
     private PartyRole partyRole;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "course_id", referencedColumnName = "enum_id")
     private Enumeration course;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "department_id", referencedColumnName = "enum_id")
     private Enumeration department;
 
     @ManyToOne
-    @JoinColumn(name = "designation_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "designation_id", referencedColumnName = "enum_id")
     private Enumeration designation;
 
 }

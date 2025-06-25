@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,14 +20,17 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long party_id;
 
+    @OneToMany(mappedBy = "party")
+    private List<PartyRole> roles;
+
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "party_type_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "party_type_id", referencedColumnName = "enum_id")
     private Enumeration party_type_id;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "status_id", referencedColumnName = "enum_id")
     private Enumeration status;
 
     @NotNull

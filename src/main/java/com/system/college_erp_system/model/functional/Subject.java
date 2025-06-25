@@ -23,12 +23,12 @@ public class Subject {
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "course_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "course_id", referencedColumnName = "enum_id")
     private Enumeration course;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "semester_id", referencedColumnName = "enum_type_id")
+    @JoinColumn(name = "semester_id", referencedColumnName = "enum_id")
     private Enumeration semester;
 
     private Integer credits;
