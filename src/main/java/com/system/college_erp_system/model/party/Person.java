@@ -5,13 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Person {
 
     @Id
@@ -19,19 +23,28 @@ public class Person {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name ="party_id")
+    @JoinColumn(name = "party_id")
     private Party party;
 
     @Column(unique = true)
     @NotNull
-    private Long enrollment_no;
+    private Long enrollmentNo;
     @NotNull
-    private String first_name;
-    private String middle_name;
+    private String firstName;
+    private String middleName;
     @NotNull
-    private String last_name;
+    private String lastName;
     @NotNull
-    private Date dob;
+    private LocalDateTime dob;
     private String gender;
+
+    @CreatedDate
+    @NotNull
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    @NotNull
+    private LocalDateTime updatedDate;
 
 }

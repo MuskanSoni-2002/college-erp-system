@@ -1,4 +1,4 @@
-package com.system.college_erp_system.model.party;
+package com.system.college_erp_system.model.party.role;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -16,19 +16,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Org {
-
+@Table(
+        name = "party_relationship",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_role_id_from", "party_role_id_to", "from_date"})
+)
+public class PartyRelationship {
     @Id
-    private Long partyId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long partyRelationshipId;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "party_id")
-    private Party party;
+    @ManyToOne
+    @JoinColumn(name = "party_role_id_from", referencedColumnName = "party_role_id")
+    private PartyRole partyRoleFrom;
+
+    @ManyToOne
+    @JoinColumn(name = "party_role_id_to", referencedColumnName = "party_role_id")
+    private PartyRole partyRoleTo;
 
     @NotNull
-    private String orgName;
-    private Integer orgGroupSize;
+    private LocalDateTime fromDate;
+
+    private LocalDateTime thruDate;
 
     @CreatedDate
     @NotNull

@@ -1,5 +1,6 @@
-package com.system.college_erp_system.model.party;
+package com.system.college_erp_system.model.party.contactMech;
 
+import com.system.college_erp_system.model.categorization.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -16,19 +17,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Org {
-
+public class ContactMech {
     @Id
-    private Long partyId;
-
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "party_id")
-    private Party party;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long contactMechId;
 
     @NotNull
-    private String orgName;
-    private Integer orgGroupSize;
+    @ManyToOne
+    @JoinColumn(name = "contact_mech_type_id", referencedColumnName = "enum_id")
+    private Enumeration contactMechType;
+
+    private String emailString;
 
     @CreatedDate
     @NotNull
@@ -38,5 +37,4 @@ public class Org {
     @LastModifiedDate
     @NotNull
     private LocalDateTime updatedDate;
-
 }

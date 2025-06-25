@@ -1,27 +1,31 @@
 package com.system.college_erp_system.model.functional;
 
 import com.system.college_erp_system.model.party.Party;
-import com.system.college_erp_system.model.config.Enumeration;
+import com.system.college_erp_system.model.categorization.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "student_marks",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id", "subject_code","exam_type_id"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id", "subject_code", "exam_type_id", "semester_id"})
 )
 public class StudentMarks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long student_marks_id;
+    private Long studentMarksId;
 
     @NotNull
     @ManyToOne
@@ -38,10 +42,23 @@ public class StudentMarks {
     @JoinColumn(name = "exam_type_id", referencedColumnName = "enum_id")
     private Enumeration examType;
 
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "semester_id", referencedColumnName = "enum_id")
+    private Enumeration semester;
 
     @NotNull
-    private Integer marks_obtained;
+    private Integer marksObtained;
 
-    private Date exam_date;
+    private LocalDateTime examDate;
+
+    @CreatedDate
+    @NotNull
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    @NotNull
+    private LocalDateTime updatedDate;
 
 }

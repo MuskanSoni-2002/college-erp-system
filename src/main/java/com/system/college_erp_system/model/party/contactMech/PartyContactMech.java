@@ -1,7 +1,7 @@
-package com.system.college_erp_system.model.functional;
+package com.system.college_erp_system.model.party.contactMech;
 
-import com.system.college_erp_system.model.party.Party;
 import com.system.college_erp_system.model.categorization.Enumeration;
+import com.system.college_erp_system.model.party.Party;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,37 +13,39 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(
-        name = "faculty_leave",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id", "leave_type_id", "from_date"})
+        name = "party_contact_mech",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id", "contact_mech_id", "contact_mech_purpose_id", "from_date"})
 )
-public class FacultyLeave {
+public class PartyContactMech {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long leaveId;
+    private Long partyContactMechId;
 
-    @ManyToOne
     @NotNull
+    @ManyToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
-    @ManyToOne
     @NotNull
-    @JoinColumn(name = "leave_type_id", referencedColumnName = "enum_id")
-    private Enumeration leaveType;
-
     @ManyToOne
-    @NotNull
-    @JoinColumn(name = "status_id", referencedColumnName = "enum_id")
-    private Enumeration status;
+    @JoinColumn(name = "contact_mech_id")
+    private ContactMech contactMech;
 
-    private String reasonDescription;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "contact_mech_purpose_id", referencedColumnName = "enum_id")
+    private Enumeration contactMechPurpose;
+
+    @NotNull
+    private LocalDateTime fromDate;
+    private LocalDateTime thruDate;
 
     @CreatedDate
     @NotNull

@@ -1,4 +1,4 @@
-package com.system.college_erp_system.model.party;
+package com.system.college_erp_system.model.party.contactMech;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -16,19 +16,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Org {
-
+public class PhoneNumber {
     @Id
-    private Long partyId;
+    private Long contactMechId;
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "party_id")
-    private Party party;
+    @JoinColumn(name = "contact_mech_id")
+    private ContactMech contactMech;
 
     @NotNull
-    private String orgName;
-    private Integer orgGroupSize;
+    @Column(length = 4)
+    private String countryCode;
+
+    @NotNull
+    @Column(length = 10, unique = true)
+    private String phoneNumber;
 
     @CreatedDate
     @NotNull

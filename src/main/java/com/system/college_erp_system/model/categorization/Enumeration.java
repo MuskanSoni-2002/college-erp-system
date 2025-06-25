@@ -1,4 +1,4 @@
-package com.system.college_erp_system.model.party;
+package com.system.college_erp_system.model.categorization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -7,28 +7,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class Org {
-
+@Entity
+@Table(
+        name = "enumeration",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"enum_type_id", "enum_value_1"})
+)
+public class Enumeration {
     @Id
-    private Long partyId;
-
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "party_id")
-    private Party party;
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    private Long enumId;
 
     @NotNull
-    private String orgName;
-    private Integer orgGroupSize;
+    private String enumTypeId;
+
+    @NotNull
+    private String enumValue_1;
+    private String enumValue_2;
+    private String description;
 
     @CreatedDate
     @NotNull
