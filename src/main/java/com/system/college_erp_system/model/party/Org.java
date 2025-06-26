@@ -23,7 +23,7 @@ public class Org {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "party_id")
+    @JoinColumn(name = "partyId")
     private Party party;
 
     @NotNull

@@ -24,19 +24,19 @@ public class PartyRoleDetails {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "party_role_id")
+    @JoinColumn(name = "partyRoleId")
     private PartyRole partyRole;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "courseId", referencedColumnName = "enumId")
     private Enumeration course;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "departmentId", referencedColumnName = "enumId")
     private Enumeration department;
 
     @ManyToOne
-    @JoinColumn(name = "designation_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "designationId", referencedColumnName = "enumId")
     private Enumeration designation;
 
     @CreatedDate

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -14,9 +15,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "enumeration",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"enum_type_id", "enum_value_1"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"enumTypeId", "enumValue_1"})
 )
 public class Enumeration {
     @Id

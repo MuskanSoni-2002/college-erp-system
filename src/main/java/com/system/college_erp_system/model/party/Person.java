@@ -23,7 +23,7 @@ public class Person {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "party_id")
+    @JoinColumn(name = "partyId")
     private Party party;
 
     @Column(unique = true)

@@ -22,7 +22,7 @@ public class PhoneNumber {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "contact_mech_id")
+    @JoinColumn(name = "contactMechId")
     private ContactMech contactMech;
 
     @NotNull

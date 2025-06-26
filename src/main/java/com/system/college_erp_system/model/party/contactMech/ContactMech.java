@@ -24,7 +24,7 @@ public class ContactMech {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "contact_mech_type_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "contactMechTypeId", referencedColumnName = "enumId")
     private Enumeration contactMechType;
 
     private String emailString;

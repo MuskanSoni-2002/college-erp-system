@@ -18,11 +18,11 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class PostalAddress {
     @Id
-    private Long contact_mech_id;
+    private Long contactMechId;
 
     @MapsId
     @OneToOne
-    @JoinColumn(name = "contact_mech_id")
+    @JoinColumn(name = "contactMechId")
     private ContactMech contactMech;
 
     @NotNull

@@ -25,12 +25,12 @@ public class Party {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "party_type_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "partyTypeId", referencedColumnName = "enumId")
     private Enumeration partyType;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "statusId", referencedColumnName = "enumId")
     private Enumeration status;
 
     @NotNull

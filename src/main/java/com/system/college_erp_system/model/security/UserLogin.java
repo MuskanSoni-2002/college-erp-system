@@ -23,7 +23,7 @@ public class UserLogin {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "party_id")
+    @JoinColumn(name = "partyId")
     private Party party;
 
     @NotNull

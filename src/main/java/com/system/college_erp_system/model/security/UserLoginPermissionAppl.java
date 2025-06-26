@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "user_login_permission_appl",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"user_login_id", "permission_id"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"userLoginId", "permissionId"})
 )
 public class UserLoginPermissionAppl {
     @Id
@@ -28,12 +28,12 @@ public class UserLoginPermissionAppl {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_login_id")
+    @JoinColumn(name = "userLoginId")
     private UserLogin userLogin;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "permission_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "permissionId", referencedColumnName = "enumId")
     private Enumeration permission;
 
     @NotNull

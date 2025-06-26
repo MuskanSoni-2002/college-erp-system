@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "party_role",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"party_id", "party_role_type_id", "from_date"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"partyId", "partyRoleTypeId", "fromDate"})
 )
 public class PartyRole {
     @Id
@@ -29,12 +29,12 @@ public class PartyRole {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "party_id")
+    @JoinColumn(name = "partyId")
     private Party party;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "party_role_type_id", referencedColumnName = "enum_id")
+    @JoinColumn(name = "partyRoleTypeId", referencedColumnName = "enumId")
     private Enumeration partyRoleType;
 
     @NotNull
