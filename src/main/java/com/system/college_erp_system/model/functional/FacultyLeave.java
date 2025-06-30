@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -44,6 +45,9 @@ public class FacultyLeave {
     private Enumeration status;
 
     private String reasonDescription;
+
+    @NotNull
+    private Date from_date;
 
     @CreatedDate
     @NotNull

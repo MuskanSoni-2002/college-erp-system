@@ -27,6 +27,8 @@ public class PartyRoleDetails {
     @JoinColumn(name = "partyRoleId")
     private PartyRole partyRole;
 
+    private String enrollmentNo;
+
     @ManyToOne
     @JoinColumn(name = "courseId", referencedColumnName = "enumId")
     private Enumeration course;

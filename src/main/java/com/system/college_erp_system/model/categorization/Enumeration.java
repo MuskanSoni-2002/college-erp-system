@@ -22,8 +22,7 @@ import java.time.LocalDateTime;
 )
 public class Enumeration {
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private Long enumId;
+    private String enumId;
 
     @NotNull
     private String enumTypeId;

@@ -27,8 +27,7 @@ public class Person {
     private Party party;
 
     @Column(unique = true)
-    @NotNull
-    private Long enrollmentNo;
+
     @NotNull
     private String firstName;
     private String middleName;
