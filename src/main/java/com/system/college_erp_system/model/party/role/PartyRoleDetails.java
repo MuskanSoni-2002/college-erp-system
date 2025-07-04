@@ -30,6 +30,10 @@ public class PartyRoleDetails {
     private String enrollmentNo;
 
     @ManyToOne
+    @JoinColumn(name = "classId", referencedColumnName = "enumId")
+    private Enumeration classId;
+
+    @ManyToOne
     @JoinColumn(name = "courseId", referencedColumnName = "enumId")
     private Enumeration course;
 
