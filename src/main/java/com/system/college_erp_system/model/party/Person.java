@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Person {
 
     @Id
-    private Long party_id;
+    private Long partyId;
 
     @OneToOne
     @MapsId

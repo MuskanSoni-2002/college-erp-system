@@ -15,16 +15,27 @@ public class PartyService {
     @Autowired
     private PartyRepo partyRepo;
 
+    public Party createParty(Party party){
+        return partyRepo.save(party);
+    }
+
+    public Party putParty(Long partyId,Party updatedParty){
+        if (!partyRepo.existsById(partyId)) {
+            throw new ResourceNotFoundException("Party not found with id: " + partyId);
+        }
+       return partyRepo.save(updatedParty);
+    }
+
     public Party getParty(Long partyId){
         return partyRepo.findById(partyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Party not found with id: " + partyId));
     }
 
-    public List<Party> getAllParty(){
+    public List<Party> getAllParties(){
         return partyRepo.findAll();
     }
 
-    public Party updateParty(Long partyId, Party updatedParty){
+    public Party patchParty(Long partyId, Party updatedParty){
 
             Party existingParty=partyRepo.findById(partyId)
                  .orElseThrow(() -> new ResourceNotFoundException("Party not found with id: " + partyId));
