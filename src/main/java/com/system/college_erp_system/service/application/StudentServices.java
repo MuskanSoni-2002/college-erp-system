@@ -1,21 +1,15 @@
 package com.system.college_erp_system.service.application;
 
 import com.system.college_erp_system.model.party.Party;
-import com.system.college_erp_system.model.party.Person;
 import com.system.college_erp_system.model.party.contactMech.ContactMech;
 import com.system.college_erp_system.model.party.contactMech.PartyContactMech;
 import com.system.college_erp_system.model.party.contactMech.PhoneNumber;
 import com.system.college_erp_system.model.party.contactMech.PostalAddress;
-import com.system.college_erp_system.model.party.role.PartyRole;
-import com.system.college_erp_system.model.party.role.PartyRoleDetails;
 import com.system.college_erp_system.service.party.PartyService;
-import com.system.college_erp_system.service.party.PersonService;
 import com.system.college_erp_system.service.party.contactMech.ContactMechService;
 import com.system.college_erp_system.service.party.contactMech.PartyContactMechService;
 import com.system.college_erp_system.service.party.contactMech.PhoneNumberService;
 import com.system.college_erp_system.service.party.contactMech.PostalAddressService;
-import com.system.college_erp_system.service.party.role.PartyRoleDetailsService;
-import com.system.college_erp_system.service.party.role.PartyRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

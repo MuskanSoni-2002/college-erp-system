@@ -1,5 +1,7 @@
-package com.system.college_erp_system.model.party.role;
+package com.system.college_erp_system.model.party.contactMech;
 
+import com.system.college_erp_system.model.categorization.Enumeration;
+import com.system.college_erp_system.model.party.Org;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,25 +19,32 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(
-        name = "party_relationship",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"partyRoleIdFrom", "partyRoleIdTo", "fromDate"})
+        name = "org_contact_mech",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"orgId", "contactMechId", "contactMechPurposeId", "fromDate"})
 )
-public class PartyRelationship {
+public class OrgContactMech {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long partyRelationshipId;
+    private Long orgContactMechId;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "partyRoleIdFrom", referencedColumnName = "partyRoleId")
-    private PartyRole partyRoleFrom;
+    @JoinColumn(name = "orgId")
+    private Org org;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "partyRoleIdTo", referencedColumnName = "partyRoleId")
-    private PartyRole partyRoleTo;
+    @JoinColumn(name = "contactMechId")
+    private ContactMech contactMech;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "contactMechPurposeId", referencedColumnName = "enumId")
+    private Enumeration contactMechPurpose;
 
     @NotNull
     private LocalDateTime fromDate;
-
     private LocalDateTime thruDate;
 
     @CreatedDate

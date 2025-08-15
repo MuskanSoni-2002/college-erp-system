@@ -2,7 +2,6 @@ package com.system.college_erp_system.service.party;
 
 import com.system.college_erp_system.exception.ResourceNotFoundException;
 import com.system.college_erp_system.model.party.Org;
-import com.system.college_erp_system.model.party.Person;
 import com.system.college_erp_system.repo.party.OrgRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

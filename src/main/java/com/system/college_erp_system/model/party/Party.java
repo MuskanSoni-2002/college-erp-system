@@ -1,6 +1,8 @@
 package com.system.college_erp_system.model.party;
 
 import com.system.college_erp_system.model.categorization.Enumeration;
+import com.system.college_erp_system.model.enums.PartyRoleType;
+import com.system.college_erp_system.model.enums.PartyStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -23,27 +25,37 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long partyId;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "partyTypeId", referencedColumnName = "enumId")
-    private Enumeration partyType;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private PartyRoleType partyRoleType;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "statusId", referencedColumnName = "enumId")
-    private Enumeration status;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private PartyStatus status;
 
-    @NotNull
+    @Column(nullable = false)
+    private String firstName;
+
+    private String middleName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    private LocalDateTime dob;
+
+    private String gender;
+
+    @Column(nullable = false)
     private LocalDateTime fromDate;
+
     private LocalDateTime thruDate;
 
     @CreatedDate
-    @NotNull
     @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

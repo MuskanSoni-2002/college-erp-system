@@ -1,5 +1,6 @@
 package com.system.college_erp_system.model.party;
 
+import com.system.college_erp_system.model.categorization.Enumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,24 +20,23 @@ import java.time.LocalDateTime;
 public class Org {
 
     @Id
-    private Long partyId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orgId;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "partyId")
-    private Party party;
-
-    @NotNull
+    @Column(nullable = false)
     private String orgName;
+
+    @JoinColumn(name = "orgType", referencedColumnName = "enumId")
+    private Enumeration orgType;
+
     private Integer orgGroupSize;
 
     @CreatedDate
-    @NotNull
     @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

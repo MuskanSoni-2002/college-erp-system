@@ -11,6 +11,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -33,6 +36,14 @@ public class UserLogin {
 
     @NotNull
     private Boolean isEnabled;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_login_permissions",
+            joinColumns = @JoinColumn(name = "user_login_id", referencedColumnName = "userLoginId"),
+            inverseJoinColumns = @JoinColumn(name = "permissionId", referencedColumnName = "enumId")
+    )
+    private Set<Enumeration> permissions = new HashSet<>();
 
     @CreatedDate
     @NotNull

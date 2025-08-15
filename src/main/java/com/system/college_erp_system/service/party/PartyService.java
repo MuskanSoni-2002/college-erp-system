@@ -36,28 +36,18 @@ public class PartyService {
         return partyRepo.findAll();
     }
 
-    public Party patchParty(Long partyId, Party updatedParty){
+    public Party patchParty(Long partyId, Party updatedParty) {
+        Party existingParty = partyRepo.findById(partyId).orElseThrow(() -> new ResourceNotFoundException("Party not found with id: " + partyId));
 
-            Party existingParty=partyRepo.findById(partyId)
-                 .orElseThrow(() -> new ResourceNotFoundException("Party not found with id: " + partyId));
-
-         if(updatedParty.getPartyType()!=null){
-             existingParty.setPartyType(updatedParty.getPartyType());
-         }
-         if(updatedParty.getStatus()!=null){
-             existingParty.setStatus(updatedParty.getStatus());
-         }
-         if(updatedParty.getThruDate()!=null){
-             existingParty.setThruDate(updatedParty.getThruDate());
-         }
+        if (updatedParty.getPartyRoleType() != null) existingParty.setPartyRoleType(updatedParty.getPartyRoleType());
+        if (updatedParty.getStatus() != null) existingParty.setStatus(updatedParty.getStatus());
+        if (updatedParty.getThruDate() != null) existingParty.setThruDate(updatedParty.getThruDate());
 
         return partyRepo.save(existingParty);
     }
 
     public void deleteParty(Long partyId){
-        if (!partyRepo.existsById(partyId)) {
-            throw new ResourceNotFoundException("Party not found with id: " + partyId);
-        }
+        if (!partyRepo.existsById(partyId)) throw new ResourceNotFoundException("Party not found with id: " + partyId);
         partyRepo.deleteById(partyId);
     }
 }

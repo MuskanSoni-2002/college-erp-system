@@ -1,6 +1,7 @@
-package com.system.college_erp_system.model.party.role;
+package com.system.college_erp_system.model.party;
 
 import com.system.college_erp_system.model.categorization.Enumeration;
+import com.system.college_erp_system.model.enums.PartyRoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,38 +13,32 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @EntityListeners(AuditingEntityListener.class)
-public class PartyRoleDetails {
-
+@Table(
+        name = "party_relationship",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"partyRoleIdFrom", "partyRoleIdTo", "fromDate"})
+)
+public class PartyRelationship {
     @Id
-    private Long partyRoleId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long partyRelationshipId;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "partyRoleId")
-    private PartyRole partyRole;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private PartyRoleType partyRoleTypeFrom;
 
-    private String enrollmentNo;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private PartyRoleType partyRoleTypeTo;
 
-    @ManyToOne
-    @JoinColumn(name = "classId", referencedColumnName = "enumId")
-    private Enumeration classId;
+    @NotNull
+    private LocalDateTime fromDate;
 
-    @ManyToOne
-    @JoinColumn(name = "courseId", referencedColumnName = "enumId")
-    private Enumeration course;
-
-    @ManyToOne
-    @JoinColumn(name = "departmentId", referencedColumnName = "enumId")
-    private Enumeration department;
-
-    @ManyToOne
-    @JoinColumn(name = "designationId", referencedColumnName = "enumId")
-    private Enumeration designation;
+    private LocalDateTime thruDate;
 
     @CreatedDate
     @NotNull
