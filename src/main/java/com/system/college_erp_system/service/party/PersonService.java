@@ -13,22 +13,26 @@ public class PersonService {
     @Autowired
     private PersonRepo personRepo;
 
+    public Person createPerson(Person person){
+        return personRepo.save(person);
+    }
+
     public Person getPerson(Long partyId){
         return personRepo.findById(partyId)
-                .orElseThrow(() -> new ResourceNotFoundException("Party not found with id: " + partyId));
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found with id: " + partyId));
     }
     public List<Person> getAllPersons(){
         return personRepo.findAll();
     }
-    public Person saveOrUpdate(Person person){
-        if(person.getPartyId()!=null && !personRepo.existsById(person.getPartyId())){
-            throw new ResourceNotFoundException("Party with ID " + person.getPartyId() + " does not exist.");
+    public Person putPerson(Long partyId,Person person){
+        if(!personRepo.existsById(partyId)){
+            throw new ResourceNotFoundException("Person with ID " + person.getPartyId() + " does not exist.");
         }
         return personRepo.save(person);
     }
     public Person patchPerson(Long partyId, Person updatedPerson){
         Person existingPerson=personRepo.findById(partyId)
-                .orElseThrow(() -> new ResourceNotFoundException("Party not found with id: " + partyId));
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found with id: " + partyId));
 
         if(updatedPerson.getFirstName()!=null){
             existingPerson.setFirstName(updatedPerson.getFirstName());
@@ -47,9 +51,9 @@ public class PersonService {
         }
          return personRepo.save(existingPerson);
     }
-    public void deleteParty(Long partyId){
+    public void deletePerson(Long partyId){
         if (!personRepo.existsById(partyId)) {
-            throw new ResourceNotFoundException("Party not found with id: " + partyId);
+            throw new ResourceNotFoundException("Person not found with id: " + partyId);
         }
         personRepo.deleteById(partyId);
     }
