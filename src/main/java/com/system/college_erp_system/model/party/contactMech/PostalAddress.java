@@ -26,30 +26,35 @@ public class PostalAddress {
     private ContactMech contactMech;
 
     @NotNull
-    @Column(length = 100)
-    private String address_1;
+    @Column(length = 100,nullable = false)
+    private String addressLine1;
 
     @Column(length = 50)
-    private String address_2;
+    private String addressLine2;
 
     @NotNull
-    @Column(length = 50)
+    @Column(length = 10, nullable = false)
+    private String postalCode;
+
+    @NotNull
+    @Column(length = 50,nullable = false)
     private String city;
 
     @NotNull
-    @Column(length = 50)
+    @Column(length = 50,nullable = false)
     private String state;
 
     @NotNull
-    @Column(length = 50)
+    @Column(length = 50,nullable = false)
     private String country;
 
+    private LocalDateTime thruDate;
+
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 }

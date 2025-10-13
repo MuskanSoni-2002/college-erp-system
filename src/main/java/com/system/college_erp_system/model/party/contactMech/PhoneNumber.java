@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(indexes = @Index(name = "idx_phone_number", columnList = "phoneNumber"))
 public class PhoneNumber {
     @Id
     private Long contactMechId;
@@ -26,20 +27,21 @@ public class PhoneNumber {
     private ContactMech contactMech;
 
     @NotNull
-    @Column(length = 4)
+    @Column(length = 4,nullable = false)
     private String countryCode;
 
     @NotNull
-    @Column(length = 10, unique = true)
-    private String phoneNumber;
+    @Column(length = 10, unique = true,nullable = false)
+    private String Number;
+
+    private LocalDateTime thruDate;
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

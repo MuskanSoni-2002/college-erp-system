@@ -25,25 +25,15 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long partyId;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private PartyRoleType partyRoleType;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private PartyStatus status;
-
-    @Column(nullable = false)
-    private String firstName;
-
-    private String middleName;
-
-    @Column(nullable = false)
-    private String lastName;
-
-    private LocalDateTime dob;
-
-    private String gender;
 
     @Column(nullable = false)
     private LocalDateTime fromDate;

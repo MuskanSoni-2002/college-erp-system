@@ -26,10 +26,11 @@ public class UserLogin {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "partyId")
+    @JoinColumn(name = "partyId",nullable = false)
     private Party party;
 
     @NotNull
+    @Column(nullable = false)
     private String password;
 
     private String passwordHint;
@@ -46,12 +47,11 @@ public class UserLogin {
     private Set<Enumeration> permissions = new HashSet<>();
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
-    @NotNull
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 

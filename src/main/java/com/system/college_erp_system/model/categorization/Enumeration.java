@@ -18,27 +18,27 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "enumeration",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"enumTypeId", "enumValue_1"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"enumType", "value"}),
+        indexes = @Index(name = "idx_enum_type", columnList = "enumType")
 )
 public class Enumeration {
     @Id
     private String enumId;
 
-    @NotNull
-    private String enumTypeId;
+    @Column(nullable = false)
+    private String enumType;
 
-    @NotNull
-    private String enumValue_1;
-    private String enumValue_2;
+    @Column(nullable = false)
+    private String value;
+    private String secondaryValue;
     private String description;
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

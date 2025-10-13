@@ -1,11 +1,13 @@
 package com.system.college_erp_system.service.party;
 
+import com.system.college_erp_system.model.party.Faculty;
 import com.system.college_erp_system.model.party.Party;
 import com.system.college_erp_system.repo.party.PartyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.system.college_erp_system.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +50,9 @@ public class PartyService {
 
     public void deleteParty(Long partyId){
         if (!partyRepo.existsById(partyId)) throw new ResourceNotFoundException("Party not found with id: " + partyId);
-        partyRepo.deleteById(partyId);
+        LocalDateTime now = LocalDateTime.now();
+        Party p = new Party();
+        p.setThruDate(now);
+        this.patchParty(partyId, p);
     }
 }

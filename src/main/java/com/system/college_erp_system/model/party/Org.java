@@ -20,23 +20,32 @@ import java.time.LocalDateTime;
 public class Org {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orgId;
+    private Long partyId;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "partyId")
+    private Party party;
 
+    @NotNull
     @Column(nullable = false)
     private String orgName;
 
-    @JoinColumn(name = "orgType", referencedColumnName = "enumId")
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orgType", referencedColumnName = "enumId",nullable = false)
     private Enumeration orgType;
 
-    private Integer orgGroupSize;
+    @Column(nullable = false)
+    private Integer orgGroupSize=0;
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedDate;
+
+    private LocalDateTime thruDate;
 
 }

@@ -1,7 +1,9 @@
 package com.system.college_erp_system.model.party.contactMech;
 
 import com.system.college_erp_system.model.categorization.Enumeration;
+import com.system.college_erp_system.model.party.Party;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +19,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(
+        name = "contact_mech",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"partyId", "contactMechTypeId", "contactMechPurposeId"})
+)
+
 public class ContactMech {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,17 +31,24 @@ public class ContactMech {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "contactMechTypeId", referencedColumnName = "enumId")
+    @JoinColumn(name = "partyId",nullable = false)
+    private Party party;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "contactMechTypeId", referencedColumnName = "enumId",nullable = false)
     private Enumeration contactMechType;
 
-    private String emailString;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "contactMechPurposeId", referencedColumnName = "enumId",nullable = false)
+    private Enumeration contactMechPurpose;
 
     @CreatedDate
-    @NotNull
     @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 }

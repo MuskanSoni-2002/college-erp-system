@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -15,33 +16,62 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+
 public class Student {
 
       @Id
       private Long partyId;
+      @OneToOne
       @MapsId
       @JoinColumn(name = "partyId")
       private Party party;
 
-      @Column(nullable = false)
+      @NotNull
+      @Column(nullable = false,unique = true)
       private Long rollNumber;
 
-      @Column(nullable = false)
+      @NotNull
+      @Column(nullable = false,unique = true)
       private String enrollNumber;
 
+      @NotNull
       @Column(nullable = false)
-      private String course;
+      private String firstName;
 
+      private String middleName;
+
+      @NotNull
       @Column(nullable = false)
-      private String sem;
+      private String lastName;
 
+      private LocalDateTime dob;
+
+      @ManyToOne(fetch = FetchType.LAZY)
+      @JoinColumn(name="gender",referencedColumnName = "enumId")
+      private Enumeration gender;
+
+      @NotNull
+      @ManyToOne(fetch = FetchType.LAZY)
+      @JoinColumn(name = "course", referencedColumnName = "enumId", nullable = false)
+      private Enumeration course;
+
+      @NotNull
+      @ManyToOne(fetch = FetchType.LAZY)
+      @JoinColumn(name="sem",referencedColumnName="enumId",nullable = false)
+      private Enumeration sem;
+
+      @NotNull
+      @ManyToOne(fetch = FetchType.LAZY)
+      @JoinColumn(name = "section", referencedColumnName = "enumId", nullable = false)
       private Enumeration section;
 
+      @NotNull
       @Column(nullable = false)
       private String session;
 
       @CreatedDate
-      @Column(updatable = false)
+      @Column(updatable = false,nullable = false)
       private LocalDateTime createdDate;
 
       @LastModifiedDate

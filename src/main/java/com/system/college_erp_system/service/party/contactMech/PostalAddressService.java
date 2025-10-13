@@ -6,6 +6,7 @@ import com.system.college_erp_system.repo.party.contactMech.PostalAddressRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,7 +30,7 @@ public class PostalAddressService {
                 .orElseThrow(() -> new ResourceNotFoundException("PostalAddress not found with id: " + contactMechId));
     }
 
-    public List<PostalAddress> getAllParties(){
+    public List<PostalAddress> getAllAddresses(){
         return postalAddressRepo.findAll();
     }
 
@@ -38,21 +39,9 @@ public class PostalAddressService {
         PostalAddress existingPostalAddress=postalAddressRepo.findById(contactMechId)
                 .orElseThrow(() -> new ResourceNotFoundException("PostalAddress not found with id: " + contactMechId));
 
-        if(updatedPostalAddress.getAddress_1()!=null){
-            existingPostalAddress.setAddress_1(updatedPostalAddress.getAddress_1());
-        }
-        if(updatedPostalAddress.getAddress_2()!=null){
-            existingPostalAddress.setAddress_2(updatedPostalAddress.getAddress_2());
-        }
-        if(updatedPostalAddress.getCountry()!=null){
-            existingPostalAddress.setCountry(updatedPostalAddress.getCountry());
-        }
-        if(updatedPostalAddress.getState()!=null){
-            existingPostalAddress.setState(updatedPostalAddress.getState());
-        }
-        if(updatedPostalAddress.getCity()!=null){
-            existingPostalAddress.setCity(updatedPostalAddress.getCity());
-        }
+
+        if(existingPostalAddress.getThruDate()!=null)
+            existingPostalAddress.setThruDate(updatedPostalAddress.getThruDate());
 
         return postalAddressRepo.save(existingPostalAddress);
     }
@@ -61,6 +50,9 @@ public class PostalAddressService {
         if (!postalAddressRepo.existsById(contactMechId)) {
             throw new ResourceNotFoundException("PostalAddress not found with id: " + contactMechId);
         }
-        postalAddressRepo.deleteById(contactMechId);
+        LocalDateTime now = LocalDateTime.now();
+        PostalAddress pa = new PostalAddress();
+        pa.setThruDate(now);
+        this.patchPostalAddress(contactMechId, pa);
     }
 }

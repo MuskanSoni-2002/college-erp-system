@@ -20,33 +20,38 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(
         name = "party_relationship",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"partyRoleIdFrom", "partyRoleIdTo", "fromDate"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"partyFrom", "partyTo", "fromDate"})
 )
 public class PartyRelationship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long partyRelationshipId;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private PartyRoleType partyRoleTypeFrom;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="partyFrom",referencedColumnName = "partyId")
+    private Party partyFrom;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private PartyRoleType partyRoleTypeTo;
+    private PartyRoleType partyRoleFrom;
 
-    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="partyTo",referencedColumnName = "partyId")
+    private Party partyTo;
+
+    @Enumerated(EnumType.STRING)
+    private PartyRoleType partyRoleTo;
+
+    @Column(nullable = false)
     private LocalDateTime fromDate;
 
     private LocalDateTime thruDate;
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

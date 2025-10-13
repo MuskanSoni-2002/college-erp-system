@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -28,37 +29,43 @@ public class StudentMarks {
     private Long studentMarksId;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "partyId")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "partyId",nullable = false)
     private Party party;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "subjectCode")
+    @JoinColumn(name = "subjectCode",nullable = false)
     private Subject subject;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "examTypeId", referencedColumnName = "enumId")
+    @JoinColumn(name = "examTypeId", referencedColumnName = "enumId",nullable = false)
     private Enumeration examType;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "semesterId", referencedColumnName = "enumId")
+    @JoinColumn(name = "semesterId", referencedColumnName = "enumId",nullable = false)
     private Enumeration semester;
 
     @NotNull
+    @Column(nullable = false)
     private Integer marksObtained;
 
-    private LocalDateTime examDate;
+    @ManyToOne
+    @JoinColumn(name = "gradeId", referencedColumnName = "enumId")
+    private Enumeration grade;
+
+    private LocalDate examDate;
+
+    private Integer totalMarks;
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

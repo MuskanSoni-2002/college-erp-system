@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -17,18 +18,38 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Faculty {
     @Id
     private Long partyId;
 
+    @OneToOne
     @MapsId
     @JoinColumn(name="partyId")
     private Party party;
 
-    @JoinColumn(name = "department", referencedColumnName = "orgId")
+    @NotNull
+    @Column(nullable = false)
+    private String firstName;
+
+    private String middleName;
+
+    @NotNull
+    @Column(nullable = false)
+    private String lastName;
+
+    private LocalDateTime dob;
+
+    private String gender;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department", referencedColumnName = "orgId",nullable = false)
     private Org department;
 
-    @JoinColumn(name = "designation", referencedColumnName = "enumId")
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "designation", referencedColumnName = "enumId",nullable = false)
     private Enumeration designation;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -40,7 +61,7 @@ public class Faculty {
     private Set<Subject> subjects =new HashSet<>();
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate

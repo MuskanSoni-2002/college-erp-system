@@ -23,29 +23,31 @@ import java.time.LocalDateTime;
 )
 public class Subject {
     @Id
+    @Column(nullable = false, length = 20)
     private String subjectCode;
+
     @NotNull
+    @Column(nullable = false)
     private String subjectName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
-    @JoinColumn(name = "courseId", referencedColumnName = "enumId")
+    @JoinColumn(name = "courseId", referencedColumnName = "enumId",nullable = false)
     private Enumeration course;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
-    @JoinColumn(name = "semesterId", referencedColumnName = "enumId")
+    @JoinColumn(name = "semesterId", referencedColumnName = "enumId",nullable = false)
     private Enumeration semester;
 
     private Integer credits;
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

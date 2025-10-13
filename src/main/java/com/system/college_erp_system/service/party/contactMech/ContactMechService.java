@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ContactMechService {
+public class  ContactMechService {
     private ContactMechRepo mechRepo;
 
     public Long createContactMech(ContactMech ContactMech){
@@ -37,11 +37,5 @@ public class ContactMechService {
             existingContactMech.setEmailString(updatedContactMech.getEmailString());
         }
         return mechRepo.save(existingContactMech);
-    }
-    public void deleteContactMech(Long contactMechId){
-        if (!mechRepo.existsById(contactMechId)) {
-            throw new ResourceNotFoundException("ContactMech not found with id: " + contactMechId);
-        }
-        mechRepo.deleteById(contactMechId);
     }
 }

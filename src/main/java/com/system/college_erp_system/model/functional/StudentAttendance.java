@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,30 +30,30 @@ public class StudentAttendance {
     private Long attendanceId;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "partyId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "partyId",nullable = false)
     private Party party;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "subjectCode")
+    @JoinColumn(name = "subjectCode",nullable = false)
     private Subject subject;
 
     @NotNull
-    private LocalDateTime attendanceDate;
+    @Column(nullable = false)
+    private LocalDate attendanceDate;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "statusId", referencedColumnName = "enumId")
+    @JoinColumn(name = "statusId", referencedColumnName = "enumId",nullable = false)
     private Enumeration status;
 
     @CreatedDate
-    @NotNull
-    @Column(updatable = false)
+    @Column(updatable = false,nullable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedDate;
 
 }

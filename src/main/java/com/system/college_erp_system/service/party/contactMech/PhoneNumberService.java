@@ -6,6 +6,7 @@ import com.system.college_erp_system.repo.party.contactMech.PhoneNumberRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -38,12 +39,8 @@ public class PhoneNumberService {
         PhoneNumber existingPhoneNumber=phoneNumberRepo.findById(contactMechId)
                 .orElseThrow(() -> new ResourceNotFoundException("PhoneNumber not found with id: " + contactMechId));
 
-        if(updatedPhoneNumber.getCountryCode()!=null){
-            existingPhoneNumber.setCountryCode(updatedPhoneNumber.getCountryCode());
-        }
-        if(updatedPhoneNumber.getPhoneNumber()!=null){
-            existingPhoneNumber.setPhoneNumber(updatedPhoneNumber.getPhoneNumber());
-        }
+        if(updatedPhoneNumber.getThruDate()!=null)
+            existingPhoneNumber.setThruDate(updatedPhoneNumber.getThruDate());
 
         return phoneNumberRepo.save(existingPhoneNumber);
     }
@@ -52,6 +49,10 @@ public class PhoneNumberService {
         if (!phoneNumberRepo.existsById(contactMechId)) {
             throw new ResourceNotFoundException("PhoneNumber not found with id: " + contactMechId);
         }
-        phoneNumberRepo.deleteById(contactMechId);
+
+        LocalDateTime now = LocalDateTime.now();
+        PhoneNumber pn = new PhoneNumber();
+        pn.setThruDate(now);
+        this.patchPhoneNumber(contactMechId, pn);
     }
 }
